@@ -219,7 +219,11 @@ CV_CORE_RTLSRC  := $(filter-out $(CV_CORE_PKG)/rtl/$(CV_CORE_LC)_register_file_l
 # FIXME: temporarily using a local manifest for the core.
 #        This is BAD PRACTICE and will be fixed with
 #        https://github.com/openhwgroup/CV_CORE/pull/421 is resolved.
+<<<<<<< Updated upstream
 CV_CORE_MANIFEST    := $(CV_CORE_PKG)/cv32e40p_manifest.flist
+=======
+CV_CORE_MANIFEST    := $(CV_CORE_PKG)/cv32e40p_fpu_manifest.flist
+>>>>>>> Stashed changes
 export DESIGN_RTL_DIR = $(CV_CORE_PKG)/rtl
 
 # Shorthand rules for convience
@@ -482,7 +486,11 @@ endif
 verilate: testbench_verilator
 
 sanity-veri-run:
+<<<<<<< Updated upstream
 	make veri-test TEST=hello-world
+=======
+	make veri-test TEST=fadd
+>>>>>>> Stashed changes
 
 testbench_verilator: CV_CORE_pkg $(TBSRC_VERI) $(TBSRC_PKG)
 	@echo "$(BANNER)"
@@ -490,7 +498,11 @@ testbench_verilator: CV_CORE_pkg $(TBSRC_VERI) $(TBSRC_PKG)
 	@echo "$(BANNER)"
 	$(VERILATOR) --cc --sv --exe \
 		$(VERI_TRACE) \
+<<<<<<< Updated upstream
 		--Wno-lint --Wno-UNOPTFLAT \
+=======
+		--Wno-lint --Wno-UNOPTFLAT -Wno-fatal \
+>>>>>>> Stashed changes
 		--Wno-MODDUP --top-module \
 		tb_top_verilator $(TBSRC_VERI) \
 		-f $(CV_CORE_MANIFEST) \

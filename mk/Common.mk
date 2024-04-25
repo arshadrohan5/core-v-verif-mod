@@ -97,7 +97,11 @@ ifeq ($(CV_CORE_PATH),)
     ifeq ($(CV_CORE_HASH), head)
       CLONE_CV_CORE_CMD = $(TMP)
     else
+<<<<<<< Updated upstream
       CLONE_CV_CORE_CMD = $(TMP); cd $(CV_CORE_PKG); git checkout $(CV_CORE_HASH)
+=======
+      CLONE_CV_CORE_CMD = $(TMP); cd $(CV_CORE_PKG); #git checkout $(CV_CORE_HASH)
+>>>>>>> Stashed changes
     endif
   else
     CLONE_CV_CORE_CMD = $(TMP); cd $(CV_CORE_PKG); git checkout tags/$(CV_CORE_TAG)
@@ -313,7 +317,11 @@ RISCV_MARCH      = $(CV_SW_MARCH)
 RISCV_CC         = $(CV_SW_CC)
 RISCV_CFLAGS     = $(CV_SW_CFLAGS)
 
+<<<<<<< Updated upstream
 CFLAGS ?= -Os -g -static -mabi=ilp32 -march=$(RISCV_MARCH) -Wall -pedantic $(RISCV_CFLAGS)
+=======
+CFLAGS ?= -Os -g -static -mabi=ilp32 -march=rv32gc_zicsr -Wall -pedantic $(RISCV_CFLAGS)
+>>>>>>> Stashed changes
 
 $(warning RISCV set to $(RISCV))
 $(warning RISCV_PREFIX set to $(RISCV_PREFIX))

@@ -90,12 +90,8 @@ module tb_top_verilator
           .RAM_ADDR_WIDTH    (RAM_ADDR_WIDTH),
           .BOOT_ADDR         (BOOT_ADDR),
           .PULP_CLUSTER      (0),
-          .FPU               (0),
-<<<<<<< Updated upstream
-          .PULP_ZFINX        (0),
-=======
+          .FPU               (1),
           .ZFINX        (0),
->>>>>>> Stashed changes
           .DM_HALTADDRESS    (32'h1A110800)
          )
     cv32e40p_tb_wrapper_i

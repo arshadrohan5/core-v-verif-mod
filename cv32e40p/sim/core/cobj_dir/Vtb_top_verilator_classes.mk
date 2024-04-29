@@ -28,6 +28,7 @@ VM_CLASSES_FAST += \
 	Vtb_top_verilator___024root__DepSet_h2c7bdad4__0 \
 	Vtb_top_verilator___024root__DepSet_h2c7bdad4__1 \
 	Vtb_top_verilator___024root__DepSet_h0cce2fb2__0 \
+	Vtb_top_verilator___024root__DepSet_h0cce2fb2__1 \
 	Vtb_top_verilator_mm_ram__R16__DepSet_hb1c0035a__0 \
 	Vtb_top_verilator_mm_ram__R16__DepSet_h7988673c__0 \
 	Vtb_top_verilator_mm_ram__R16__03a__03arand_default_gnt__Vclpkg__DepSet_hfe6ac1cc__0 \
@@ -38,6 +39,7 @@ VM_CLASSES_SLOW += \
 	Vtb_top_verilator__ConstPool_0 \
 	Vtb_top_verilator___024root__Slow \
 	Vtb_top_verilator___024root__DepSet_h2c7bdad4__0__Slow \
+	Vtb_top_verilator___024root__DepSet_h2c7bdad4__1__Slow \
 	Vtb_top_verilator___024root__DepSet_h0cce2fb2__0__Slow \
 	Vtb_top_verilator_mm_ram__R16__Slow \
 	Vtb_top_verilator_mm_ram__R16__DepSet_hb1c0035a__0__Slow \

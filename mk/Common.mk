@@ -6,7 +6,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     https://solderpad.org/licenses/
+#	 https://solderpad.org/licenses/
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -87,24 +87,20 @@ endif
 # Generate command to clone or symlink the core RTL
 ifeq ($(CV_CORE_PATH),)
   ifeq ($(CV_CORE_BRANCH), master)
-    TMP = git clone $(CV_CORE_REPO) $(CV_CORE_PKG)
+	TMP = git clone $(CV_CORE_REPO) $(CV_CORE_PKG)
   else
-    TMP = git clone -b $(CV_CORE_BRANCH) --single-branch $(CV_CORE_REPO) $(CV_CORE_PKG)
+	TMP = git clone -b $(CV_CORE_BRANCH) --single-branch $(CV_CORE_REPO) $(CV_CORE_PKG)
   endif
 
   # If a TAG is specified, the HASH is not considered
   ifeq ($(CV_CORE_TAG), none)
-    ifeq ($(CV_CORE_HASH), head)
-      CLONE_CV_CORE_CMD = $(TMP)
-    else
-<<<<<<< Updated upstream
-      CLONE_CV_CORE_CMD = $(TMP); cd $(CV_CORE_PKG); git checkout $(CV_CORE_HASH)
-=======
-      CLONE_CV_CORE_CMD = $(TMP); cd $(CV_CORE_PKG); #git checkout $(CV_CORE_HASH)
->>>>>>> Stashed changes
-    endif
+	ifeq ($(CV_CORE_HASH), head)
+	  CLONE_CV_CORE_CMD = $(TMP)
+	else
+	  CLONE_CV_CORE_CMD = $(TMP); cd $(CV_CORE_PKG); #git checkout $(CV_CORE_HASH)
+	endif
   else
-    CLONE_CV_CORE_CMD = $(TMP); cd $(CV_CORE_PKG); git checkout tags/$(CV_CORE_TAG)
+	CLONE_CV_CORE_CMD = $(TMP); cd $(CV_CORE_PKG); git checkout tags/$(CV_CORE_TAG)
   endif
 else
   CLONE_CV_CORE_CMD = ln -s $(CV_CORE_PATH) $(CV_CORE_PKG)
@@ -188,7 +184,7 @@ endif
 ###############################################################################
 # Imperas Instruction Set Simulator
 
-DV_OVPM_HOME    = $(CORE_V_VERIF)/vendor_lib/imperas
+DV_OVPM_HOME	= $(CORE_V_VERIF)/vendor_lib/imperas
 DV_OVPM_MODEL   = $(DV_OVPM_HOME)/imperas_DV_COREV
 DV_OVPM_DESIGN  = $(DV_OVPM_HOME)/design
 OVP_MODEL_DPI   = $(DV_OVPM_MODEL)/bin/Linux64/imperas_CV32.dpi.so
@@ -309,19 +305,15 @@ endif
 endif
 endif
 
-RISCV            = $(CV_SW_TOOLCHAIN)
-RISCV_PREFIX     = $(CV_SW_PREFIX)
+RISCV			= $(CV_SW_TOOLCHAIN)
+RISCV_PREFIX	 = $(CV_SW_PREFIX)
 RISCV_EXE_PREFIX = $(RISCV)/bin/$(RISCV_PREFIX)
 
-RISCV_MARCH      = $(CV_SW_MARCH)
-RISCV_CC         = $(CV_SW_CC)
-RISCV_CFLAGS     = $(CV_SW_CFLAGS)
+RISCV_MARCH	  = $(CV_SW_MARCH)
+RISCV_CC		 = $(CV_SW_CC)
+RISCV_CFLAGS	 = $(CV_SW_CFLAGS)
 
-<<<<<<< Updated upstream
-CFLAGS ?= -Os -g -static -mabi=ilp32 -march=$(RISCV_MARCH) -Wall -pedantic $(RISCV_CFLAGS)
-=======
 CFLAGS ?= -Os -g -static -mabi=ilp32 -march=rv32gc_zicsr -Wall -pedantic $(RISCV_CFLAGS)
->>>>>>> Stashed changes
 
 $(warning RISCV set to $(RISCV))
 $(warning RISCV_PREFIX set to $(RISCV_PREFIX))
@@ -336,7 +328,7 @@ $(warning RISCV_CFLAGS set to $(RISCV_CFLAGS))
 #  CFLAGS = -Os -g -D__riscv__=1 -D__LITTLE_ENDIAN__=1 -march=rv32imcxpulpv2 -Wa,-march=rv32imcxpulpv2 -fdata-sections -ffunction-sections -fdiagnostics-color=always
 #endif
 
-ASM       ?= ../../tests/asm
+ASM	   ?= ../../tests/asm
 ASM_DIR   ?= $(ASM)
 
 # CORE FIRMWARE vars. The C and assembler test-programs
@@ -344,38 +336,38 @@ ASM_DIR   ?= $(ASM)
 #
 # Note that the DSIM targets allow for writing the log-files to arbitrary
 # locations, so all of these paths are absolute, except those used by Verilator.
-CORE_TEST_DIR                        = $(CORE_V_VERIF)/$(CV_CORE_LC)/tests/programs
-BSP                                  = $(CORE_V_VERIF)/$(CV_CORE_LC)/bsp
-FIRMWARE                             = $(CORE_TEST_DIR)/firmware
-VERI_FIRMWARE                        = ../../tests/core/firmware
-ASM_PROG                            ?= my_hello_world
-CV32_RISCV_TESTS_FIRMWARE            = $(CORE_TEST_DIR)/cv32_riscv_tests_firmware
+CORE_TEST_DIR						= $(CORE_V_VERIF)/$(CV_CORE_LC)/tests/programs
+BSP								  = $(CORE_V_VERIF)/$(CV_CORE_LC)/bsp
+FIRMWARE							 = $(CORE_TEST_DIR)/firmware
+VERI_FIRMWARE						= ../../tests/core/firmware
+ASM_PROG							?= my_hello_world
+CV32_RISCV_TESTS_FIRMWARE			= $(CORE_TEST_DIR)/cv32_riscv_tests_firmware
 CV32_RISCV_COMPLIANCE_TESTS_FIRMWARE = $(CORE_TEST_DIR)/cv32_riscv_compliance_tests_firmware
-RISCV_TESTS                          = $(CORE_TEST_DIR)/riscv_tests
-RISCV_COMPLIANCE_TESTS               = $(CORE_TEST_DIR)/riscv_compliance_tests
-RISCV_TEST_INCLUDES                  = -I$(CORE_TEST_DIR)/riscv_tests/ \
-                                       -I$(CORE_TEST_DIR)/riscv_tests/macros/scalar \
-                                       -I$(CORE_TEST_DIR)/riscv_tests/rv64ui \
-                                       -I$(CORE_TEST_DIR)/riscv_tests/rv64um
-CV32_RISCV_TESTS_FIRMWARE_OBJS       = $(addprefix $(CV32_RISCV_TESTS_FIRMWARE)/, \
-                                         start.o print.o sieve.o multest.o stats.o)
+RISCV_TESTS						  = $(CORE_TEST_DIR)/riscv_tests
+RISCV_COMPLIANCE_TESTS			   = $(CORE_TEST_DIR)/riscv_compliance_tests
+RISCV_TEST_INCLUDES				  = -I$(CORE_TEST_DIR)/riscv_tests/ \
+									   -I$(CORE_TEST_DIR)/riscv_tests/macros/scalar \
+									   -I$(CORE_TEST_DIR)/riscv_tests/rv64ui \
+									   -I$(CORE_TEST_DIR)/riscv_tests/rv64um
+CV32_RISCV_TESTS_FIRMWARE_OBJS	   = $(addprefix $(CV32_RISCV_TESTS_FIRMWARE)/, \
+										 start.o print.o sieve.o multest.o stats.o)
 CV32_RISCV_COMPLIANCE_TESTS_FIRMWARE_OBJS = $(addprefix $(CV32_RISCV_COMPLIANCE_TESTS_FIRMWARE)/, \
-                                              start.o print.o sieve.o multest.o stats.o)
-RISCV_TESTS_OBJS         = $(addsuffix .o, \
-                             $(basename $(wildcard $(RISCV_TESTS)/rv32ui/*.S)) \
-                             $(basename $(wildcard $(RISCV_TESTS)/rv32um/*.S)) \
-                             $(basename $(wildcard $(RISCV_TESTS)/rv32uc/*.S)))
-FIRMWARE_OBJS            = $(addprefix $(FIRMWARE)/, \
-                             start.o print.o sieve.o multest.o stats.o)
-FIRMWARE_TEST_OBJS       = $(addsuffix .o, \
-                             $(basename $(wildcard $(RISCV_TESTS)/rv32ui/*.S)) \
-                             $(basename $(wildcard $(RISCV_TESTS)/rv32um/*.S)) \
-                             $(basename $(wildcard $(RISCV_TESTS)/rv32uc/*.S)))
+											  start.o print.o sieve.o multest.o stats.o)
+RISCV_TESTS_OBJS		 = $(addsuffix .o, \
+							 $(basename $(wildcard $(RISCV_TESTS)/rv32ui/*.S)) \
+							 $(basename $(wildcard $(RISCV_TESTS)/rv32um/*.S)) \
+							 $(basename $(wildcard $(RISCV_TESTS)/rv32uc/*.S)))
+FIRMWARE_OBJS			= $(addprefix $(FIRMWARE)/, \
+							 start.o print.o sieve.o multest.o stats.o)
+FIRMWARE_TEST_OBJS	   = $(addsuffix .o, \
+							 $(basename $(wildcard $(RISCV_TESTS)/rv32ui/*.S)) \
+							 $(basename $(wildcard $(RISCV_TESTS)/rv32um/*.S)) \
+							 $(basename $(wildcard $(RISCV_TESTS)/rv32uc/*.S)))
 FIRMWARE_SHORT_TEST_OBJS = $(addsuffix .o, \
-                             $(basename $(wildcard $(RISCV_TESTS)/rv32ui/*.S)) \
-                             $(basename $(wildcard $(RISCV_TESTS)/rv32um/*.S)))
-COMPLIANCE_TEST_OBJS     = $(addsuffix .o, \
-                             $(basename $(wildcard $(RISCV_COMPLIANCE_TESTS)/*.S)))
+							 $(basename $(wildcard $(RISCV_TESTS)/rv32ui/*.S)) \
+							 $(basename $(wildcard $(RISCV_TESTS)/rv32um/*.S)))
+COMPLIANCE_TEST_OBJS	 = $(addsuffix .o, \
+							 $(basename $(wildcard $(RISCV_COMPLIANCE_TESTS)/*.S)))
 
 
 # Thales verilator testbench compilation start
@@ -424,10 +416,10 @@ endif
 
 ###############################################################################
 # Rule to generate hex (loadable by simulators) from elf
-#    $@ is the file being generated.
-#    $< is first prerequiste.
-#    $^ is all prerequistes.
-#    $* is file_name (w/o extension) of target
+#	$@ is the file being generated.
+#	$< is first prerequiste.
+#	$^ is all prerequistes.
+#	$* is file_name (w/o extension) of target
 %.hex: %.elf
 	@echo "$(BANNER)"
 	@echo "* Generating hexfile, readelf and objdump files"
@@ -443,11 +435,11 @@ endif
 		-S \
 		$*.elf > $*.objdump
 	$(RISCV_EXE_PREFIX)objdump \
-    	-d \
-        -S \
+		-d \
+		-S \
 		-M no-aliases \
 		-M numeric \
-        -l \
+		-l \
 		$*.elf | ${CORE_V_VERIF}/bin/objdump2itb - > $*.itb
 
 # Patterned targets to generate ELF.  Used only if explicit targets do not match.
@@ -458,9 +450,9 @@ endif
 # For directed tests, TEST_FILES gathers all of the .S and .c files in a test directory
 # For corev_ tests, TEST_FILES will only point to the specific .S for the RUN_INDEX and TEST_NAME provided to make
 ifeq ($(shell echo $(TEST) | head -c 6),corev_)
-TEST_FILES        = $(filter %.c %.S,$(wildcard  $(SIM_TEST_PROGRAM_RESULTS)/$(TEST_NAME)$(OPT_RUN_INDEX_SUFFIX).S))
+TEST_FILES		= $(filter %.c %.S,$(wildcard  $(SIM_TEST_PROGRAM_RESULTS)/$(TEST_NAME)$(OPT_RUN_INDEX_SUFFIX).S))
 else
-TEST_FILES        = $(filter %.c %.S,$(wildcard  $(TEST_TEST_DIR)/*))
+TEST_FILES		= $(filter %.c %.S,$(wildcard  $(TEST_TEST_DIR)/*))
 endif
 
 # If a test defines "default_cflags" in its yaml, then it is responsible to define ALL flags
@@ -475,7 +467,7 @@ endif
 # this must be evaluated at access time, so ifeq/ifneq does
 # not get parsed correctly
 TEST_RESULTS_LD = $(addprefix $(SIM_TEST_PROGRAM_RESULTS)/, link.ld)
-TEST_LD         = $(addprefix $(TEST_TEST_DIR)/, link.ld)
+TEST_LD		 = $(addprefix $(TEST_TEST_DIR)/, link.ld)
 
 LD_LIBRARY 	= $(if $(wildcard $(TEST_RESULTS_LD)),-L $(SIM_TEST_PROGRAM_RESULTS),$(if $(wildcard $(TEST_LD)),-L $(TEST_TEST_DIR),))
 LD_FILE 	= $(if $(wildcard $(TEST_RESULTS_LD)),$(TEST_RESULTS_LD),$(if $(wildcard $(TEST_LD)),$(TEST_LD),$(BSP)/link.ld))
@@ -677,12 +669,12 @@ vcs-unit-test:  vcs-run
 ###############################################################################
 # Build disassembler
 
-DPI_DASM_SRC    = $(DPI_DASM_PKG)/dpi_dasm.cxx $(DPI_DASM_PKG)/spike/disasm.cc $(DPI_DASM_SPIKE_PKG)/disasm/regnames.cc
+DPI_DASM_SRC	= $(DPI_DASM_PKG)/dpi_dasm.cxx $(DPI_DASM_PKG)/spike/disasm.cc $(DPI_DASM_SPIKE_PKG)/disasm/regnames.cc
 DPI_DASM_ARCH   = $(shell uname)$(shell getconf LONG_BIT)
-DPI_DASM_LIB    ?= $(DPI_DASM_PKG)/lib/$(DPI_DASM_ARCH)/libdpi_dasm.so
+DPI_DASM_LIB	?= $(DPI_DASM_PKG)/lib/$(DPI_DASM_ARCH)/libdpi_dasm.so
 DPI_DASM_CFLAGS = -shared -fPIC -std=c++11
-DPI_DASM_INC    = -I$(DPI_DASM_PKG) -I$(DPI_INCLUDE) -I$(DPI_DASM_SPIKE_PKG)/riscv -I$(DPI_DASM_SPIKE_PKG)/softfloat
-DPI_DASM_CXX    = g++
+DPI_DASM_INC	= -I$(DPI_DASM_PKG) -I$(DPI_INCLUDE) -I$(DPI_DASM_SPIKE_PKG)/riscv -I$(DPI_DASM_SPIKE_PKG)/softfloat
+DPI_DASM_CXX	= g++
 
 dpi_dasm: $(DPI_DASM_SPIKE_PKG)
 	$(CLONE_DPI_DASM_SPIKE_CMD)
@@ -710,10 +702,10 @@ spike_lib: $(SPIKE_FESVR_LIB).so $(SPIKE_RISCV_LIB).so
 ###############################################################################
 # Build SVLIB DPI
 
-SVLIB_SRC    = $(SVLIB_PKG)/svlib/src/dpi/svlib_dpi.c
+SVLIB_SRC	= $(SVLIB_PKG)/svlib/src/dpi/svlib_dpi.c
 SVLIB_CFLAGS = -shared -fPIC
-SVLIB_LIB    = $(SVLIB_PKG)/../svlib_dpi.so
-SVLIB_CXX    = gcc
+SVLIB_LIB	= $(SVLIB_PKG)/../svlib_dpi.so
+SVLIB_CXX	= gcc
 
 svlib: $(SVLIB_PKG)
 	$(SVLIB_CXX) $(SVLIB_CFLAGS) $(SVLIB) $(SVLIB_SRC) -I$(DPI_INCLUDE) -o $(SVLIB_LIB)
